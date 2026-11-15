@@ -42,8 +42,7 @@ if year_options[selected_year] is not None:
     hour_df = hour_df[hour_df['yr'] == year_options[selected_year]]
     day_df = day_df[day_df['yr'] == year_options[selected_year]]
 
-# Ringkasan Statistik (KPI)
-
+# Ringkasan Statistik
 st.subheader("Ringkasan Penyewaan Sepeda")
 
 col1, col2, col3 = st.columns(3)
@@ -66,25 +65,25 @@ with col3:
         value=f"{day_df['cnt'].mean():.2f}"
     )
 
-# Menampilkan informasi dataset
+# Informasi dataset
 st.subheader("Data Penyewaan Sepeda")
-st.write("Dataset berhasil dimuat.")
-
 st.write("Data penyewaan per jam:")
 st.dataframe(hour_df.head())
 
 st.write("Data penyewaan per hari:")
 st.dataframe(day_df.head())
 
-# Visualisasi 1: Hari Kerja vs Bukan Hari Kerja
+# Visualisasi 1: Pertanyaan Bisnis 1
+st.subheader(
+    "1. Perbandingan Rata-rata Penyewaan Sepeda per Jam "
+    "antara Hari Kerja dan Bukan Hari Kerja"
+)
 
-st.subheader("Rata-rata Penyewaan Sepeda Berdasarkan Jam")
-
-hourly_workingday = hour_df.groupby(
+hourly_data = hour_df.groupby(
     ['hr', 'workingday']
 )['cnt'].mean().reset_index()
 
-hourly_workingday['Kategori Hari'] = hourly_workingday['workingday'].map({
+hourly_data['workingday'] = hourly_data['workingday'].map({
     0: 'Bukan Hari Kerja',
     1: 'Hari Kerja'
 })
@@ -92,23 +91,32 @@ hourly_workingday['Kategori Hari'] = hourly_workingday['workingday'].map({
 fig, ax = plt.subplots(figsize=(12, 6))
 
 sns.lineplot(
-    data=hourly_workingday,
+    data=hourly_data,
     x='hr',
     y='cnt',
-    hue='Kategori Hari',
+    hue='workingday',
     marker='o',
     ax=ax
 )
 
-ax.set_xlabel("Jam")
-ax.set_ylabel("Rata-rata Penyewaan Sepeda")
+ax.set_xlabel("Jam (00.00–23.00)")
+ax.set_ylabel("Rata-rata Jumlah Penyewaan Sepeda")
+ax.set_title(
+    "Perbandingan Rata-rata Penyewaan Sepeda per Jam "
+    "pada Hari Kerja dan Bukan Hari Kerja (2011–2012)"
+)
 ax.set_xticks(range(24))
-ax.set_title("Pola Penyewaan Sepeda per Jam")
+ax.legend(title="Kategori Hari")
+ax.grid(axis='y', alpha=0.3)
+
 st.pyplot(fig)
+plt.close(fig)
 
-# Visualisasi 2: Musim dan Kondisi Cuaca
-
-st.subheader("2. Rata-rata Penyewaan Berdasarkan Musim dan Cuaca")
+# Visualisasi 2: Pertanyaan Bisnis 2
+st.subheader(
+    "2. Rata-rata Penyewaan Sepeda Berdasarkan Musim "
+    "dan Kondisi Cuaca"
+)
 
 season_weather_data = day_df.groupby(
     ['season', 'weathersit']
@@ -122,10 +130,10 @@ season_weather_data['season'] = season_weather_data['season'].map({
 })
 
 season_weather_data['weathersit'] = season_weather_data['weathersit'].map({
-    1: 'Cerah',
-    2: 'Berawan',
-    3: 'Hujan Ringan',
-    4: 'Hujan Lebat'
+    1: 'Clear',
+    2: 'Cloudy',
+    3: 'Light Rain/Snow',
+    4: 'Heavy Rain/Snow'
 })
 
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -135,48 +143,19 @@ sns.barplot(
     x='season',
     y='cnt',
     hue='weathersit',
+    order=['Spring', 'Summer', 'Fall', 'Winter'],
+    hue_order=['Clear', 'Cloudy', 'Light Rain/Snow'],
     ax=ax
 )
 
 ax.set_xlabel("Musim")
-ax.set_ylabel("Rata-rata Penyewaan Sepeda per Hari")
-ax.set_title("Rata-rata Penyewaan Berdasarkan Musim dan Kondisi Cuaca")
-ax.legend(title="Kondisi Cuaca")
-
-st.pyplot(fig)
-
-plt.close(fig)
-
-# Visualisasi 3: Pola Penyewaan Berdasarkan Jam
-
-st.subheader("3. Pola Penyewaan Sepeda Berdasarkan Jam")
-
-hourly_data = hour_df.groupby(
-    ['hr', 'workingday']
-)['cnt'].mean().reset_index()
-
-hourly_data['workingday'] = hourly_data['workingday'].map({
-    0: 'Bukan Hari Kerja',
-    1: 'Hari Kerja'
-})
-
-fig, ax = plt.subplots(figsize=(10, 5))
-
-sns.lineplot(
-    data=hourly_data,
-    x='hr',
-    y='cnt',
-    hue='workingday',
-    marker='o',
-    ax=ax
+ax.set_ylabel("Rata-rata Jumlah Penyewaan Sepeda per Hari")
+ax.set_title(
+    "Rata-rata Penyewaan Sepeda Berdasarkan Musim "
+    "dan Kondisi Cuaca (2011–2012)"
 )
-
-ax.set_xlabel("Jam")
-ax.set_ylabel("Rata-rata Penyewaan Sepeda")
-ax.set_title("Pola Penyewaan Sepeda Berdasarkan Jam")
-ax.set_xticks(range(0, 24))
-ax.legend(title="Kategori Hari")
+ax.legend(title="Kondisi Cuaca")
+ax.grid(axis='y', alpha=0.3)
 
 st.pyplot(fig)
-
 plt.close(fig)
