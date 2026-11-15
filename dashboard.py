@@ -80,7 +80,7 @@ st.dataframe(day_df.head())
 
 st.subheader("Rata-rata Penyewaan Sepeda Berdasarkan Jam")
 
-hourly_workingday = filtered_hour.groupby(
+hourly_workingday = hour_df.groupby(
     ['hr', 'workingday']
 )['cnt'].mean().reset_index()
 
