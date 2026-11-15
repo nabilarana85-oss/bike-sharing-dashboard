@@ -1,86 +1,66 @@
-
 # Proyek Analisis Data: Bike Sharing Dataset
 
-## Deskripsi Proyek
-Proyek ini merupakan analisis data penyewaan sepeda (*Bike Sharing Dataset*) pada periode tahun 2011–2012. Analisis dilakukan untuk mengetahui pola penyewaan sepeda berdasarkan hari kerja, musim, kondisi cuaca, dan waktu penyewaan.
-
-Hasil analisis dibuat dalam bentuk visualisasi dan dashboard interaktif menggunakan Streamlit.
+## Deskripsi
+Proyek ini bertujuan untuk menganalisis data penyewaan sepeda berdasarkan hari kerja, jam penyewaan, musim, dan kondisi cuaca selama tahun 2011–2012.
 
 ## Pertanyaan Bisnis
-1. Bagaimana perbedaan rata-rata jumlah penyewaan sepeda per jam antara hari kerja dan bukan hari kerja selama tahun 2011–2012?
-2. Bagaimana perbedaan rata-rata jumlah penyewaan sepeda per hari berdasarkan musim dan kondisi cuaca selama tahun 2011–2012?
+1. Bagaimana perbedaan rata-rata jumlah penyewaan sepeda pada setiap jam antara hari kerja dan bukan hari kerja?
+2. Bagaimana perbedaan rata-rata penyewaan sepeda berdasarkan musim dan kondisi cuaca?
 
-## Dataset
-Dataset yang digunakan dalam proyek ini adalah:
-- `hour.csv`: berisi data penyewaan sepeda berdasarkan jam.
-- `day.csv`: berisi data penyewaan sepeda berdasarkan hari.
+## Struktur File
+- `dashboard.py`: File dashboard Streamlit.
+- `hour.csv`: Dataset penyewaan sepeda per jam.
+- `day.csv`: Dataset penyewaan sepeda per hari.
+- `requirements.txt`: Daftar library yang dibutuhkan.
+- `Copy_of_Proyek_Analisis_Data (2).ipynb`: Notebook analisis data.
 
-Kedua dataset mencakup periode tahun 2011–2012.
+## Persiapan Environment
 
-## Tahapan Analisis Data
+1. Pastikan Python sudah terinstal.
+2. Download atau clone repository ini.
+3. Buka terminal atau Command Prompt pada folder proyek.
+4. Buat virtual environment:
 
-1. **Gathering Data**
+   ```bash
+   python -m venv .venv
+   ```
 
-   Memuat dataset `hour.csv` dan `day.csv` yang digunakan untuk proses analisis.
+5. Aktifkan virtual environment.
 
-2. **Assessing Data**
+   Windows:
+   ```bash
+   .venv\Scripts\activate
+   ```
 
-   Memeriksa kondisi dataset, seperti jumlah data, tipe data, nilai kosong, dan data duplikat.
+   Mac/Linux:
+   ```bash
+   source .venv/bin/activate
+   ```
 
-3. **Cleaning Data**
+## Instalasi Library
 
-   Melakukan pemeriksaan dan penyesuaian data yang diperlukan agar data siap digunakan dalam analisis.
+Jalankan perintah berikut:
 
-4. **Exploratory Data Analysis (EDA)**
+```bash
+pip install -r requirements.txt
+```
 
-   Mengeksplorasi data untuk mengetahui pola penyewaan sepeda berdasarkan hari kerja, musim, kondisi cuaca, dan jam.
+## Menjalankan Dashboard
 
-5. **Explanatory Analysis**
+Jalankan perintah:
 
-   Membuat visualisasi untuk menjawab pertanyaan bisnis dan menyampaikan hasil analisis.
+```bash
+streamlit run dashboard.py
+```
 
-## Hasil Analisis
+Dashboard akan terbuka melalui browser pada alamat:
 
-Berdasarkan hasil analisis, diperoleh beberapa temuan berikut:
+`http://localhost:8501`
 
-- Rata-rata penyewaan sepeda per jam pada hari kerja sebesar 193,21, sedangkan pada bukan hari kerja sebesar 181,41.
-- Pada hari kerja, penyewaan sepeda mencapai puncak sekitar pukul 08.00 dan 17.00.
-- Pada bukan hari kerja, penyewaan sepeda cenderung mencapai puncak sekitar pukul 13.00.
-- Berdasarkan musim dan kondisi cuaca, rata-rata penyewaan harian tertinggi terdapat pada musim gugur (*Fall*) dengan kondisi cuaca cerah.
-- Kondisi cuaca yang lebih baik cenderung diikuti oleh jumlah penyewaan sepeda yang lebih tinggi.
-
-## Dashboard
-
-Dashboard dibuat menggunakan Streamlit untuk menampilkan hasil analisis data secara lebih mudah. Dashboard memiliki beberapa fitur, yaitu:
-
+## Fitur Dashboard
 - Filter data berdasarkan tahun 2011 dan 2012.
-- Menampilkan total penyewaan sepeda.
-- Menampilkan rata-rata penyewaan per jam dan per hari.
-- Membandingkan rata-rata penyewaan pada hari kerja dan bukan hari kerja.
-- Menampilkan rata-rata penyewaan berdasarkan musim dan kondisi cuaca.
-- Menampilkan pola penyewaan sepeda berdasarkan jam.
+- Visualisasi rata-rata penyewaan sepeda berdasarkan jam dan kategori hari.
+- Visualisasi rata-rata penyewaan sepeda berdasarkan musim dan kondisi cuaca.
 
-## Cara Menjalankan Dashboard
-
-Pastikan Python sudah terpasang di komputer.
-
-1. Simpan file `dashboard.py`, `hour.csv`, dan `day.csv` dalam satu folder.
-2. Buka terminal atau Command Prompt pada folder tersebut.
-3. Install library yang dibutuhkan dengan perintah:
-
-   `pip install -r requirements.txt`
-
-4. Jalankan dashboard menggunakan perintah:
-
-   `streamlit run dashboard.py`
-
-5. Setelah berhasil dijalankan, buka alamat lokal yang muncul di terminal. Biasanya dashboard dapat diakses melalui:
-
-   `http://localhost:8501`
-
-## Library yang Digunakan
-
-- Pandas
-- Matplotlib
-- Seaborn
-- Streamlit
+## Link Dashboard
+https://bike-sharing-dashboard-asxf8ypawqdd6neykppkxr.streamlit.app
