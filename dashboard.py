@@ -78,31 +78,33 @@ st.dataframe(day_df.head())
 
 # Visualisasi 1: Hari Kerja vs Bukan Hari Kerja
 
-st.subheader("1. Rata-rata Penyewaan: Hari Kerja vs Bukan Hari Kerja")
+st.subheader("Rata-rata Penyewaan Sepeda Berdasarkan Jam")
 
-workingday_data = hour_df.groupby('workingday')['cnt'].mean().reset_index()
+hourly_workingday = filtered_hour.groupby(
+    ['hr', 'workingday']
+)['cnt'].mean().reset_index()
 
-workingday_data['workingday'] = workingday_data['workingday'].map({
+hourly_workingday['Kategori Hari'] = hourly_workingday['workingday'].map({
     0: 'Bukan Hari Kerja',
     1: 'Hari Kerja'
 })
 
-fig, ax = plt.subplots(figsize=(8, 5))
+fig, ax = plt.subplots(figsize=(12, 6))
 
-sns.barplot(
-    data=workingday_data,
-    x='workingday',
+sns.lineplot(
+    data=hourly_workingday,
+    x='hr',
     y='cnt',
+    hue='Kategori Hari',
+    marker='o',
     ax=ax
 )
 
-ax.set_xlabel("Kategori Hari")
-ax.set_ylabel("Rata-rata Penyewaan Sepeda per Jam")
-ax.set_title("Rata-rata Penyewaan Sepeda: Hari Kerja vs Bukan Hari Kerja")
-
+ax.set_xlabel("Jam")
+ax.set_ylabel("Rata-rata Penyewaan Sepeda")
+ax.set_xticks(range(24))
+ax.set_title("Pola Penyewaan Sepeda per Jam")
 st.pyplot(fig)
-
-plt.close(fig)
 
 # Visualisasi 2: Musim dan Kondisi Cuaca
 
