@@ -8,11 +8,27 @@ Proyek ini bertujuan untuk menganalisis data penyewaan sepeda berdasarkan hari k
 2. Bagaimana perbedaan rata-rata penyewaan sepeda berdasarkan musim dan kondisi cuaca?
 
 ## Struktur File
-- `dashboard.py`: File dashboard Streamlit.
-- `hour.csv`: Dataset penyewaan sepeda per jam.
-- `day.csv`: Dataset penyewaan sepeda per hari.
+```
+submission/
+├── dashboard/
+│   ├── main_data.csv
+│   └── dashboard.py
+├── data/
+│   ├── hour.csv
+│   └── day.csv
+├── notebook.ipynb
+├── README.md
+├── requirements.txt
+└── url.txt
+```
+
+- `dashboard/dashboard.py`: File dashboard Streamlit.
+- `dashboard/main_data.csv`: Data hasil pembersihan yang dibaca oleh dashboard.
+- `data/hour.csv`: Dataset mentah penyewaan sepeda per jam.
+- `data/day.csv`: Dataset mentah penyewaan sepeda per hari.
+- `notebook.ipynb`: Notebook analisis data.
 - `requirements.txt`: Daftar library yang dibutuhkan.
-- `Copy_of_Proyek_Analisis_Data (2).ipynb`: Notebook analisis data.
+- `url.txt`: Tautan dashboard Streamlit.
 
 ## Persiapan Environment
 
@@ -50,7 +66,7 @@ pip install -r requirements.txt
 Jalankan perintah:
 
 ```bash
-streamlit run dashboard.py
+streamlit run dashboard/dashboard.py
 ```
 
 Dashboard akan terbuka melalui browser pada alamat:
@@ -63,4 +79,4 @@ Dashboard akan terbuka melalui browser pada alamat:
 - Visualisasi rata-rata penyewaan sepeda berdasarkan musim dan kondisi cuaca.
 
 ## Link Dashboard
-https://bike-sharing-dashboard-asxf8ypawqdd6neykppkxr.streamlit.app
+https://bike-sharing-dashboard-6oppenu3es8pvanxqfxc8d.streamlit.app
